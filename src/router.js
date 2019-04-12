@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home'
 import Login from './views/Login'
+import City from './views/city'
 
 Vue.use(Router)
 
@@ -33,6 +34,10 @@ export default new Router({
     {
       path:'/login',
       component:Login
+    },
+    {
+      path:'/city',
+      component:City
     }
   ]
 })

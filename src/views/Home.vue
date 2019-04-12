@@ -9,18 +9,18 @@
         <span class="">当前选择城市</span>
         <span class="right fs0-8 col9f">定位不准时,表在城市列表选择</span>
       </div>
-      <mt-cell :title="currentcity" class="col after" to="" is-link value=""></mt-cell>
+      <mt-cell :title="currentcity" class="col after" to="city" is-link value=""></mt-cell>
 
       <div class="mgtio10 bgfff">
         <mt-cell class="after" title="热门城市"></mt-cell>
         <div class="itembox ovhid col">
-          <div v-for="(item, index) in hotcity" :key="item.id">{{item.name}}</div>
+          <div v-for="(item, index) in hotcity" :key="item.id" @click="gocity">{{item.name}}</div>
         </div>
 
         <div v-for="(items,index) in citylist" class="mgtop10 bgfff">
           <mt-cell class="after" :title="index"></mt-cell>
           <div class="itembox ovhid">
-            <div class="nowrap" v-for="item in items">{{item.name}}</div>
+            <div class="nowrap" v-for="item in items" @click="gocity">{{item.name}}</div>
           </div>        
         </div>  
 
@@ -66,6 +66,9 @@ export default {
     },
     gologin(){  //跳转到登录/注册页面
       this.$router.push('login')
+    },
+    gocity(){ //跳转到城市页面
+      this.$router.push('city')
     }
   },
 }
