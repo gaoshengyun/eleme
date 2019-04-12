@@ -9,6 +9,10 @@ import 'mint-ui/lib/style.css'
 import './common/less/mycss.less'
 Vue.use(Mint)
 
+//引入axios
+import Axios from 'axios'
+Vue.prototype.axios = Axios
+
 Vue.config.productionTip = false
 
 new Vue({

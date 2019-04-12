@@ -10,44 +10,20 @@
         <span class="">当前选择城市</span>
         <span class="right fs0-8 col9f">定位不准时,表在城市列表选择</span>
       </div>
-      <mt-cell title="上海" class="col after" to="" is-link value=""></mt-cell>
+      <mt-cell :title="currentcity" class="col after" to="" is-link value=""></mt-cell>
 
       <div class="mgtio10 bgfff">
         <mt-cell class="after" title="热门城市"></mt-cell>
         <div class="itembox ovhid col">
-          <div>上海</div>
-          <div>上海</div>
-          <div>上海</div>
-          <div>上海</div>
-          <div>上海</div>
-          <div>上海</div>
-          <div>上海</div>
-          <div>上海</div>
-          <div>上海</div>
-          <div>上海</div>
-          <div>上海</div>
-          <div>上海</div>
-          <div>上海</div>
+          <div v-for="(item, index) in hotcity" :key="item.id">{{item.name}}</div>
         </div>
 
-        <div class="mptop10 bgfff">
-          <mt-cell class="after" title="A"></mt-cell>
+        <div v-for="(items,index) in citylist" class="mgtop10 bgfff">
+          <mt-cell class="after" :title="index"></mt-cell>
           <div class="itembox ovhid">
-            <div>上海</div>
-            <div>上海</div>
-            <div>上海</div>
-            <div>上海</div>
-            <div>上海</div>
-            <div>上海</div>
-            <div>上海</div>
-            <div>上海</div>
-            <div>上海</div>
-            <div>上海</div>
-            <div>上海</div>
-            <div>上海</div>
-            <div>上海</div>
-          </div>
-        </div>
+            <div class="nowrap" v-for="item in items">{{item.name}}</div>
+          </div>        
+        </div>  
 
       </div>
     </div>
@@ -55,7 +31,41 @@
 </template>
 <script>
 export default {
-  
+  data() {
+    return {
+      citylist : {},
+      hotcity : {},
+      currentcity:''
+    }
+  },
+  created() {
+    this.getallcities()
+    this.gethotcities()
+    this.getcurrentcity()
+  },
+  methods: {
+    getallcities(){
+      this.axios.get('https://elm.cangdu.org/v1/cities?type=group').then(result => {
+        if(result.status === 200){
+          this.citylist = result.data
+        }
+      })
+    },
+    gethotcities(){
+      this.axios.get('https://elm.cangdu.org/v1/cities?type=hot').then( result => {
+        if(result.status === 200){
+          this.hotcity = result.data
+        }
+      })
+    },
+    getcurrentcity(){
+      this.axios.get('https://elm.cangdu.org/v1/cities?type=guess').then(result=>{
+        if(result.status === 200){
+          this.currentcity = result.data.name
+        }
+      })
+    }
+  },
 }
 </script>
 <style lang="less" scoped>
