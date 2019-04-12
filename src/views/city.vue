@@ -1,6 +1,6 @@
 <template>
   <div>
-    <mt-header title="天津" class="fs1-2" fixed>
+    <mt-header :title="$store.state.currentcity.name" class="fs1-2" fixed>
       <mt-button slot="left">
         <mt-button icon="back"></mt-button>
       </mt-button>
