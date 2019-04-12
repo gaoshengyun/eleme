@@ -2,8 +2,7 @@
   <div>
     <mt-header fixed class="bgblu">
       <span slot='left'>eleme</span>
-      <mt-button slot="right">登录 | </mt-button>
-      <mt-button slot="right">注册</mt-button>
+      <mt-button slot="right" @click="gologin">登录 | 注册</mt-button>
     </mt-header>
     <div class="padtop40 bgf5">
       <div class="ih50 padlr10 box bgfff">
@@ -44,26 +43,29 @@ export default {
     this.getcurrentcity()
   },
   methods: {
-    getallcities(){
+    getallcities(){ //获取所有城市
       this.axios.get('https://elm.cangdu.org/v1/cities?type=group').then(result => {
         if(result.status === 200){
           this.citylist = result.data
         }
       })
     },
-    gethotcities(){
+    gethotcities(){ //获取热门城市
       this.axios.get('https://elm.cangdu.org/v1/cities?type=hot').then( result => {
         if(result.status === 200){
           this.hotcity = result.data
         }
       })
     },
-    getcurrentcity(){
+    getcurrentcity(){ //获取当前城市
       this.axios.get('https://elm.cangdu.org/v1/cities?type=guess').then(result=>{
         if(result.status === 200){
           this.currentcity = result.data.name
         }
       })
+    },
+    gologin(){  //跳转到登录/注册页面
+      this.$router.push('login')
     }
   },
 }
