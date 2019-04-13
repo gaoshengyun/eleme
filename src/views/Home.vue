@@ -59,7 +59,7 @@ export default {
     getcurrentcity(){ //获取当前城市
       this.axios.get('https://elm.cangdu.org/v1/cities?type=guess').then(result=>{
         if(result.status === 200){
-          this.$store.state.currentcity.name =reult.data.name
+          this.$store.state.currentcity.name =result.data.name
           this.$store.state.currentcity.id  = result.data.id
         }
       })
