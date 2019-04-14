@@ -41,7 +41,16 @@
 <script>
 import '../../common/js/iconfont.js'
 export default {
-  
+  computed: {
+    gopage(){
+      return this.$store.state.selected
+    }
+  },
+  watch: {
+    gopage(newval,oldval){
+      this.$router.push(newval)
+    }
+  },
 }
 </script>
 <style lang="less" scoped>
