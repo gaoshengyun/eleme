@@ -9,8 +9,28 @@
           </svg>
         </div>
       </router-link>
+      <mt-button class="fs0-8" slot="right">登录 | 注册</mt-button>
     </mt-header>
     <!-- 头部 -->
+
+    <!-- 中间主体 -->
+    <div class="padtop40">
+
+      <!-- 分类滑动 -->
+      <mt-swipe class="myswipe" :auto="0">
+        <mt-swipe-item v-for="(items, index) in category" :key="index">
+          <div v-for="(item, index) in items" :key="index" class="eventcate">
+            <div class="imgbox"><img :src="imgBaseUrl+item.image_url"></div>
+            <div class="fs0-8 col9f mgtop5">{{item.title}}</div>
+          </div>
+        </mt-swipe-item>
+      </mt-swipe>
+      <!-- 分类滑动 -->
+
+    </div>
+    <!-- 中间主体 -->
+
+    
 
 
     <foot></foot>
@@ -21,12 +41,47 @@ import Foot from '../../components/footer/footer'
 export default {
   data() {
     return {
-      
+      category:[], //分类
+      imgBaseUrl:'https://fuss10.elemecdn.com', //图片域名地址
     }
   },
   components:{
     Foot,
-  }
+  },
+  created() {
+    this.getcategory()
+  },
+  methods: {
+    getcategory(){
+      this.axios.get('http://cangdu.org:8001/v2/index_entry').then(result=>{
+        console.log(result)
+        if(result.status === 200){
+          //this.category = result.data
+          //alert(this.category.length)
+          let data = result.data
+          let num = parseInt(data.length/8)
+          let category = []
+          let arr = []
+          for(let i=0;i<num;i++){
+            arr = []
+            for(let j=0;j<8;j++){
+              arr.push(data[i*8+j])
+            }
+            category.push(arr)
+          }
+          arr = []
+          if(num*8<data.length){
+            for(let i=num*8;i<data.length;i++){
+              arr.push(data[num*8+i])
+            }
+            category.push(arr)
+          }
+          this.category = category
+          console.log(this.category)
+        }
+      })
+    }
+  },
 }
 </script>
 <style lang="less" scoped>
@@ -61,7 +116,7 @@ export default {
   background-color:#26a2ff;
 }
 
-.myitem>div{
+.eventcate{
   width:25%;
   height:50%;
   box-sizing:border-box;
