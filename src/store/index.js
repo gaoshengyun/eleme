@@ -9,7 +9,8 @@ const state = {
   currentcity:{
     id:'',
     name:''
-  }
+  },
+  selected:'miste'
 }
 
 export default new Vuex.Store({
