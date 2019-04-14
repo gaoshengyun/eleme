@@ -1,6 +1,18 @@
 <template>
   <div>
-    msite
+    <!-- 头部 -->
+    <mt-header fixed class="fs1-2" title="标题标题标题标题标题标题标题标题标题标题标题标题">
+      <router-link to="/" slot="left">
+        <div class="search2">
+          <svg :class="[$store.state.selected=='profile'? 'selectedsvg' : '']" class="svgicon" aria-hidden="true">
+            <use xlink:href="#icon-sousuo"></use>
+          </svg>
+        </div>
+      </router-link>
+    </mt-header>
+    <!-- 头部 -->
+
+
     <foot></foot>
   </div>
 </template>
@@ -18,5 +30,185 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+.svgicon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+  fill: #ffffff;
+}
+.fs10{
+  font-size: 12px;
+  transform: scale(.8);
+  display:inline-block;
+}
+.mgr{
+  transform-origin:100% 50% 0;/*改变缩放基点*/
+}
+.mgl{
+  transform-origin:0 50% 0;/*改变缩放基点*/
+}
+.myswipe{
+  height:210px;
+  box-sizing:border-box;
+  padding-bottom:30px;
+  padding-top:10px;
+  background-color:#ffffff;
+  border-bottom:1px solid #E4E4E4;
+}
+.myswipe .mint-swipe-indicators .is-active{
+  background-color:#26a2ff;
+}
 
+.myitem>div{
+  width:25%;
+  height:50%;
+  box-sizing:border-box;
+  float:left;
+  text-align:center;
+}
+.imgbox{
+  height:60%;
+}
+.imgbox img{
+  height:100%;
+}
+.shopicon{
+  width:100%;
+  height:100%;
+  margin-bottom:-2px;
+}
+.svgbox{
+  width:15px;
+  height:15px;
+}
+.mgleft10{
+  margin-left:10px;
+}
+.shoplist{
+  padding:10px;
+  overflow: hidden;
+  display:flex;
+}
+.shoplist>div{
+  float:left;
+}
+.shopimgbox{
+  width:60px;
+  height:60px;
+  margin-right:5px;
+}
+.shopimgbox>img{
+  height:100%;
+  width:100%;
+  background-color:red;
+}
+.maindiv{
+  border-top:1px solid #E4E4E4;
+}
+
+.search2{
+  width:20px;
+  height:20px;
+}
+.rightbox{
+  font-size:0.8rem;
+  flex:1;
+}
+.shoptop,.xxdiv{
+  height:25px;
+  line-height:25px;
+}
+.pinpai{
+  display:inline-block;
+  width:30px;
+  text-align:center;
+  font-weight:bold;
+  height:20px;
+  line-height:20px;
+  background-color:#ffd930;
+  border-radius:3px;
+}
+.shopname{
+  font-weight:bold;
+  font-size:0.8rem;
+}
+.rightspan>span{
+  display:inline-block;
+  height:14px;
+  border:1px solid #A3ACB7;
+  margin-left:3px;
+  padding:1px;
+  color:#A3ACB7;
+  line-height:14px;
+  font-size:12px;
+}
+
+.xx{
+  width:10px;
+  height:10px;
+  
+}
+.xxbox{
+  display:inline-block;
+  height:25px;
+  box-sizing:border-box;
+}
+.xxbox>span{
+    margin-right:-2px;
+}
+.xxspan1{
+  position:relative;
+  display:inline-block;
+}
+.xxspan2{
+  display:inline-block;
+  position:absolute;
+  left:0px;
+  overflow: hidden;
+}
+.w1{
+  width:10%;
+}
+.w2{
+  width:20%;
+}
+.w3{
+  width:30%;
+}
+.w4{
+  width:40%;
+}
+.w5{
+  width:50%;
+}
+.w6{
+  width:60%;
+}
+.w7{
+  width:70%;
+}
+.w8{
+  width:80%;
+}
+.w9{
+  width:90%;
+}
+.fn{
+  background-color:#3190E8;
+  color:white !important;
+  border-color:#3190E8 !important;
+}
+.zs{
+  color:#3190E8 !important;
+   border-color:#3190E8 !important;
+}
+.mgleft8{
+  margin-left:-8px;
+}
+.shopfoot>div{
+  width:50%;
+  float:left;
+}
 </style>
