@@ -1,5 +1,6 @@
 <template>
   <div>
+    
     <!-- 头部 -->
     <mt-header fixed class="fs1-2" title="标题标题标题标题标题标题标题标题标题标题标题标题">
       <router-link to="/" slot="left">
@@ -15,7 +16,7 @@
 
     <!-- 中间主体 -->
     <div class="padtop40">
-
+      
       <!-- 分类滑动 -->
       <mt-swipe class="myswipe" :auto="0">
         <mt-swipe-item v-for="(items, index) in category" :key="index">
@@ -26,7 +27,7 @@
         </mt-swipe-item>
       </mt-swipe>
       <!-- 分类滑动 -->
-
+      <loading v-show="isload"></loading>
       <div class="mgtop10 bgfff maindiv">
         <div class="ih30 pad10">
           <div class="svgbox left">
@@ -81,16 +82,19 @@
 </template>
 <script>
 import Foot from '../../components/footer/footer'
+import Loading from '../../components/loading/loading'
 export default {
   data() {
     return {
       category:[], //分类
       imgBaseUrl:'https://fuss10.elemecdn.com', //图片域名地址
       shoplist:[],  //端口列表
+      isload:true
     }
   },
   components:{
     Foot,
+    Loading
   },
   created() {
     this.getcategory()
@@ -130,7 +134,9 @@ export default {
       this.axios.get('http://cangdu.org:8001/shopping/restaurants?latitude=31.22967&longitude=121.4762').then(result => {
         if(result.status === 200){
           console.log(result.data)
+          this.isload = false
           this.shoplist = result.data
+
         }
       })
     }
