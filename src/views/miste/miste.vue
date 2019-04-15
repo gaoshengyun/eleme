@@ -27,6 +27,49 @@
       </mt-swipe>
       <!-- 分类滑动 -->
 
+      <div class="mgtop10 bgfff maindiv">
+        <div class="ih30 pad10">
+          <div class="svgbox left">
+            <div name="shop" class="shopicon"></div>
+          </div>
+          <div class="fs0-8 left col9f mgleft10">
+            附近商家
+          </div>
+        </div>
+
+        <div class="shoplist after" v-for="(item, index) in shoplist" :key="item.id">
+            <div class="shopimgbox">
+                <img :src="'https://elm.cangdu.org/img/'+item.image_path">
+            </div>
+            <div class="rightbox">
+                <div class="shoptop">
+                  <span class="pinpai fs10 mgl">品牌</span>
+                  <span class="shopname">{{item.name}}</span>
+                  <span class="rightspan right fs10 mgr">
+                    <span class="" v-for="(itemsupports, index) in item.supports" :key="itemsupports.id">{{itemsupports.icon_name}}</span>
+                   </span>
+                </div>
+                <div class="xxdiv">
+                  <div class="xxbox fs10 mgl">
+                    <span><em name="xx" class="xx">评分:</em></span>
+                  </div>
+                  <span class="colred fs10 mgl mgleft8">{{item.rating}}</span>
+                  <span class="fs10 mgl">月售{{item.recent_order_num}}单</span>
+                  <span class="rightspan fs10 right mgr">
+                      <span v-show="item.delivery_mode" class="fn ">{{item.delivery_mode.text}}</span>
+                      <span class="zs ">准时达</span>
+                  </span>
+                </div>
+                <div class="shopfoot">
+                    <div><span class="fs10 mgl">&yen;{{item.float_minimum_order_amount}} 起送/配送费约&yen;{{item.piecewise_agent_fee.tips}}</span></div>
+                    <div><span class="right fs10 mgr"><span class="">{{item.distance}}</span><span class="col">{{item.order_lead_time}}</span></span></div>
+                </div>
+            </div>
+        </div>
+
+
+      </div>
+
     </div>
     <!-- 中间主体 -->
 
@@ -43,6 +86,7 @@ export default {
     return {
       category:[], //分类
       imgBaseUrl:'https://fuss10.elemecdn.com', //图片域名地址
+      shoplist:[],  //端口列表
     }
   },
   components:{
@@ -50,11 +94,12 @@ export default {
   },
   created() {
     this.getcategory()
+    this.getshoplist()
   },
   methods: {
     getcategory(){
       this.axios.get('http://cangdu.org:8001/v2/index_entry').then(result=>{
-        console.log(result)
+        // console.log(result)
         if(result.status === 200){
           //this.category = result.data
           //alert(this.category.length)
@@ -77,7 +122,15 @@ export default {
             category.push(arr)
           }
           this.category = category
-          console.log(this.category)
+          // console.log(this.category)
+        }
+      })
+    },
+    getshoplist(){  //商品列表
+      this.axios.get('http://cangdu.org:8001/shopping/restaurants?latitude=31.22967&longitude=121.4762').then(result => {
+        if(result.status === 200){
+          console.log(result.data)
+          this.shoplist = result.data
         }
       })
     }
@@ -203,12 +256,13 @@ export default {
 .xx{
   width:10px;
   height:10px;
-  
+  font-style: normal;
 }
 .xxbox{
   display:inline-block;
   height:25px;
   box-sizing:border-box;
+  padding-right: 10px;
 }
 .xxbox>span{
     margin-right:-2px;
@@ -260,7 +314,7 @@ export default {
    border-color:#3190E8 !important;
 }
 .mgleft8{
-  margin-left:-8px;
+  margin-left: -8px;
 }
 .shopfoot>div{
   width:50%;
