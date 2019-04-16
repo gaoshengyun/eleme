@@ -7,6 +7,7 @@ import Miste from './views/miste/miste'
 import Order from './views/order/order'
 import Search from './views/search/search'
 import Profile from './views/profile/profile'
+import Shop from './views/shop/shop'
 
 Vue.use(Router)
 
@@ -45,6 +46,10 @@ export default new Router({
     {
       path:'/profile',
       component:Profile
+    },
+    {
+      path:'/shop',
+      component:Shop
     }
   ]
 })
